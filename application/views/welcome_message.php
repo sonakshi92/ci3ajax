@@ -8,7 +8,7 @@
 		load_products();
 		function load_products(){
 			$.ajax({
-			url:'products.php',
+			url:"<?php echo site_url('welcome/products')?>",
 			type:'post',
 			success:function(data){
 				$('#display').html(data);
