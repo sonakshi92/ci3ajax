@@ -138,8 +138,8 @@ class Welcome extends CI_Controller
 	}
 
 	public function orderSuccess($ordId){
-		//$data['order'] = $this->cart_model->getOrder($ordId);
-		echo '<pre>';print_r($data);
+		$data['order'] = $this->cart_model->getOrder($ordId);
+		//echo '<pre>';print_r($data);
 		$this->load->view('header', $data);
 		$this->load->view('receipt');
 	}

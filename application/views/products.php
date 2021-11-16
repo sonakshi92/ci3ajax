@@ -12,10 +12,12 @@
     <div><strong><?php echo $row->name; ?></strong></div>
 
     <div class="text-danger">Price:<?php echo " $ ".$row->price; ?></div>
+    <?php $in_session = "0";
+        if (in_array($row->id, array_column($this->cart->contents(), 'id')))
+                $in_session = "1"; ?>
+    <div><input type="button" name="add" onClick="cart(<?php echo $row->id;?>);" class="btn btn-success addtocart" value="Add to cart" <?php if($in_session != "0") { ?>style="display:none" <?php } ?>></div>
 
-    <div><input type="button" name="add" id="add_<?php echo $row->id;?>" onClick="cart(<?php echo $row->id;?>);" class="btn btn-success addtocart" value="Add to cart" ></div>
-
-    <div><input type="button" name="added" id="added_<?php echo $row->id;?>"  class="addedtocart" style="display:none" value="Already Added"></div>
+    <div><input type="button" name="added" class="addedtocart" value="Already Added" <?php if($in_session != "1") { ?>style="display:none" <?php } ?>></div>
 </div >
 <?php } } else{?>
 <h1>No Products to display</h1>
@@ -32,8 +34,6 @@ jQuery.ajax({
     success:function(data){
         // data = json_decode(data);
         // alert(data);
-        $("#add_"+id).hide();
-        $("#added_"+id).show();
         location.reload();
     }
 });
